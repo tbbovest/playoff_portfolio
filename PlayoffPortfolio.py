@@ -64,7 +64,6 @@ for s in scores:
         inside_parentheses = False
     elif not inside_parentheses:
         final_scores.append(s)
-print(final_scores)
 
 # Remove blank list elements
 team_names_cleaned = [word for word in team_names if any (char.isalpha() for char in word)]
@@ -89,6 +88,10 @@ for i in range(0, len(team_names_cleaned), 2):
 
 print(winners)
 
+#Get associated ticker for each winner
+winning_tickers = []
+for i in winners:
+    winning_tickers.append(team_tickers[i])
 
 BASE_URL = 'https://paper-api.alpaca.markets'
 ACCOUNT_URL = 'https://paper-api.alpaca.markets/v2/account'
@@ -112,5 +115,7 @@ def create_order(symbol, qty, side, type, time_in_force):
 
     return json.loads(r.content)
 
-
-
+print(winning_tickers)
+for i in winning_tickers:
+    #create_order(i, 1, "buy", "market", "gtc")
+    print("Sending buy order for: " + i)
